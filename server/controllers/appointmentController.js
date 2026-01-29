@@ -1,5 +1,4 @@
 const Appointment = require('../models/Appointment');
-const Pet = require('../models/Pet');
 const Joi = require('joi');
 
 const appointmentSchema = Joi.object({
