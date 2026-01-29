@@ -1,4 +1,7 @@
-require('dotenv').config();
+// Only load dotenv if not in test mode (tests set env vars directly)
+if (process.env.NODE_ENV !== 'test') {
+  require('dotenv').config();
+}
 const express = require('express');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -27,8 +30,10 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
-// Database connection
-connectDB();
+// Database connection (skip in test environment)
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();
+}
 
 // Routes
 app.use('/api', routes);
